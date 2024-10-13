@@ -1,0 +1,83 @@
+//create event
+curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"event example\", \"date\":\"5-05-2024\", \"location\":\"sydney\"}" http://localhost:8082/events
+curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"event example2\", \"date\":\"6-05-2024\", \"location\":\"mel\"}" http://localhost:8082/events
+curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"event example3\", \"date\":\"7-05-2024\", \"location\":\"can\"}" http://localhost:8082/events
+
+//create attendee
+curl -X POST -H "Content-Type:application/json" -d "{\"fname\":\"john\", \"lname\":\"doe\", \"email\":\"jd@gmail.com\"}" http://localhost:8080/attendees
+curl -X POST -H "Content-Type:application/json" -d "{\"fname\":\"john2\", \"lname\":\"doe2\", \"email\":\"jd2@gmail.com\"}" http://localhost:8080/attendees
+curl -X POST -H "Content-Type:application/json" -d "{\"fname\":\"john3\", \"lname\":\"doe3\", \"email\":\"jd3@gmail.com\"}" http://localhost:8080/attendees
+
+//put attendee in event list (change event/attendee id)
+curl -i -X PUT http://localhost:8082/events/1/attendees/1
+
+//get attendees 
+curl -X GET http://localhost:8080/attendees
+curl -X GET http://localhost:8080/attendees/1   (can change 1)
+
+//get events
+curl -X GET http://localhost:8082/events
+curl -X GET http://localhost:8082/events/1    (can change 1)
+
+//get organisers
+curl -X GET http://localhost:8080/organisers
+curl -X GET http://localhost:8080/organisers/1     (can change 1)
+
+//create organiser
+curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"organiserName\", \"contactInfo\":\"org@gmail.com\"}" http://localhost:8080/organisers
+curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"organiserName2\", \"contactInfo\":\"org2@gmail.com\"}" http://localhost:8080/organisers
+curl -X POST -H "Content-Type:application/json" -d "{\"name\":\"organiserName3\", \"contactInfo\":\"org3@gmail.com\"}" http://localhost:8080/organisers
+
+//put event in organiser list  (change organiser/event id)
+curl -i -X PUT http://localhost:8080/organisers/1/events/1
+
+//remove event from organiser    (change organiser/event id)
+curl -i -X PUT http://localhost:8080/organisers/1/events/1/remove
+
+//remove attendee from event     (change event/attendee id)
+curl -i -X PUT http://localhost:8082/events/1/attendees/1/remove
+
+
+
+//create organiser message
+curl -X POST -H "Content-Type:application/json" -d "{\"fromOrganiser\":\"organiserName\", \"date\":\"6-06-24\", \"content\":\"Are you still coming?\"}" http://localhost:8081/organiserMessages
+curl -X POST -H "Content-Type:application/json" -d "{\"fromOrganiser\":\"organiserName\", \"date\":\"30-06-24\", \"content\":\"reply pls\"}" http://localhost:8081/organiserMessages
+
+//put organiser message in attendee
+curl -i -X PUT http://localhost:8080/attendees/1/inbox/1
+
+//remove organiser message from attendee
+curl -i -X PUT http://localhost:8080/attendees/1/inbox/1/remove
+
+//get organiser messages
+curl -X GET http://localhost:8081/organiserMessages
+curl -X GET http://localhost:8081/organiserMessages/1
+
+
+
+//create attendee message
+curl -X POST -H "Content-Type:application/json" -d "{\"fromAttendee\":\"john doe\", \"date\":\"8-07-24\", \"content\":\"Is the event still on?\"}" http://localhost:8081/attendeeMessages
+
+//put attendee message in organiser
+curl -i -X PUT http://localhost:8080/organisers/1/inbox/1
+
+//remove attendee message from organiser
+curl -i -X PUT http://localhost:8080/organisers/1/inbox/1/remove
+
+//get attendee messages
+curl -X GET http://localhost:8081/attendeeMessages
+curl -X GET http://localhost:8081/attendeeMessages/1
+
+
+//edit event deets
+curl -i -X PUT http://localhost:8082/events/1/edit/event1NewName,10-10-2030,mars
+
+
+
+
+TO DO:
+create github
+create subscription microservice
+add "price" attribute to events + 1-1 relation between subscription and users
+
+rewrite everything in kafka
