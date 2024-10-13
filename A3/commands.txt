@@ -74,10 +74,30 @@ curl -i -X PUT http://localhost:8082/events/1/edit/event1NewName,10-10-2030,mars
 
 
 
+//create subscription
+curl -X POST -H "Content-Type:application/json" -d "{\"type\":\"gold\", \"expirary\":\"10-10-24\"}" http://localhost:8083/subscriptions
+
+//put attendee in sub
+curl -i -X PUT http://localhost:8083/subscription/1/attendees/1
+
+//remove attendee from sub
+curl -i -X PUT http://localhost:8083/subscription/1/attendees/1/remove
+
+//edit sub details
+curl -i -X PUT http://localhost:8083/subscriptions/1/edit/gold,1-1-2050
+
+
+
 
 TO DO:
-create github
-create subscription microservice
-add "price" attribute to events + 1-1 relation between subscription and users
+share github
+
+add "price" attribute to events + rest requests to change it
+
+update all other ms's with new classes
+
+test everything
+
+
 
 rewrite everything in kafka
