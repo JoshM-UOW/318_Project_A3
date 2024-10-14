@@ -38,7 +38,7 @@ public class SubscriptionService {
     //create an attendee message
     public Subscription createSubscription(Subscription newSub) {
         //save event
-        eventPublisher.publishEvent(new SubscriptionEvent("Create Subscription", newSub.getType(), newSub.getExpirary()));
+        eventPublisher.publishEvent(new SubscriptionEvent("Create Subscription", newSub.getType(), newSub.getExpiry()));
 
         return subscriptionRepository.save(newSub);
     }
@@ -52,7 +52,7 @@ public class SubscriptionService {
         subscription.addAttendee(attendee);
         attendee.setSubscription(subscription);
         //save event
-        eventPublisher.publishEvent(new SubscriptionEvent("Added Attendee id(" + attendeeId + ") to Sub id(" + id + ")", subscription.getType(), subscription.getExpirary()));
+        eventPublisher.publishEvent(new SubscriptionEvent("Added Attendee id(" + attendeeId + ") to Sub id(" + id + ")", subscription.getType(), subscription.getExpiry()));
 
         return subscriptionRepository.save(subscription);
     }
@@ -65,7 +65,7 @@ public class SubscriptionService {
         subscription.removeAttendee(attendee);
         attendee.setSubscription(null);
         //save event
-        eventPublisher.publishEvent(new SubscriptionEvent("Removed Attendee id(" + attendeeId + ") from Sub id(" + id + ")", subscription.getType(), subscription.getExpirary()));
+        eventPublisher.publishEvent(new SubscriptionEvent("Removed Attendee id(" + attendeeId + ") from Sub id(" + id + ")", subscription.getType(), subscription.getExpiry()));
 
         return subscriptionRepository.save(subscription);
     }
@@ -81,12 +81,12 @@ public class SubscriptionService {
     }
 
     //edit event
-    public Subscription editSubscription(Long id, String type, String expirary){
+    public Subscription editSubscription(Long id, String type, String expiry){
         Subscription subscription = subscriptionRepository.findById(id).orElseThrow(RuntimeException::new);
         subscription.setType(type);
-        subscription.setExpirary(expirary);
+        subscription.setExpiry(expiry);
         //save event
-        eventPublisher.publishEvent(new SubscriptionEvent("Edited Sub id(" + id + ")", subscription.getType(), subscription.getExpirary()));
+        eventPublisher.publishEvent(new SubscriptionEvent("Edited Sub id(" + id + ")", subscription.getType(), subscription.getExpiry()));
 
         return subscriptionRepository.save(subscription);
     }

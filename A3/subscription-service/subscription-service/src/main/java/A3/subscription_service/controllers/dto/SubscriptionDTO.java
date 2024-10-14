@@ -9,7 +9,7 @@ public class SubscriptionDTO {
 
     private String type; //can be gold/platium   the price for tickets is less for each upgrade
 
-    private String expirary;
+    private String expiry;
 
     //given to (attendees)  list all attendees with a subscription
     private static ArrayList<Attendee> attendees = new ArrayList<Attendee>();
@@ -29,8 +29,8 @@ public class SubscriptionDTO {
     public void setType(String type) {this.type = type;}
 
     //expirary
-    public String getExpirary() {return expirary;}
-    public void setExpirary(String expirary) {this.expirary = expirary;}
+    public String getExpiry() {return expiry;}
+    public void setExpiry(String expiry) {this.expiry = expiry;}
 
     //attendees
     public ArrayList<Attendee> getAttendees(){

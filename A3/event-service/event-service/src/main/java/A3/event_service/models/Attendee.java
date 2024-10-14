@@ -34,6 +34,13 @@ public class Attendee {
     @OneToMany(cascade=CascadeType.PERSIST, mappedBy = "organiserMessage")
     private static ArrayList<OrganiserMessage> inbox = new ArrayList<OrganiserMessage>();
 
+    //subscription
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name = "subscription_id")
+    @JsonIgnore
+    private Subscription subscription;
+
+
     public Attendee() {};
 
     //id
@@ -93,5 +100,13 @@ public class Attendee {
                 itr.remove();
             }
         }
+    }
+
+    //subscription
+    public Subscription getSubscription(){
+        return subscription;
+    }
+    public void setSubscription(Subscription subscription){
+        this.subscription = subscription;
     }
 }

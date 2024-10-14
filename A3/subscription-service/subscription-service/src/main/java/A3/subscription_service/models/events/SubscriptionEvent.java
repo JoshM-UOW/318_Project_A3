@@ -17,12 +17,12 @@ public class SubscriptionEvent {
 
     //date
     @Column
-    private String expirary;
+    private String expiry;
 
-    public SubscriptionEvent(String eventName, String type, String expirary){
+    public SubscriptionEvent(String eventName, String type, String expiry){
         this.eventName = eventName;
         this.type = type;
-        this.expirary = expirary;
+        this.expiry = expiry;
     }
 
     //id
@@ -49,12 +49,12 @@ public class SubscriptionEvent {
         this.type = type;
     }
 
-    //expirary
-    public String getExpirary(){
-        return expirary;
+    //expiry
+    public String getExpiry(){
+        return expiry;
     }
-    public void setExpirary(String expirary) {
-        this.expirary = expirary;
+    public void setExpiry(String expiry) {
+        this.expiry = expiry;
     }
 
 
@@ -63,7 +63,7 @@ public class SubscriptionEvent {
         return "EventEvent{" +
                 "event_name='" + getEventName() + '\'' +
                 ", type='" + getType() + '\'' +
-                ", expiry='" + getExpirary() + '\'' +
+                ", expiry='" + getExpiry() + '\'' +
                 '}';
     }
 }

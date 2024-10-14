@@ -38,7 +38,7 @@ public class EventService {
     //save event
     public Event saveEvent(Event newEvent) {
         //save event
-        eventPublisher.publishEvent(new EventEvent("Create Event", newEvent.getName(), newEvent.getDate(), newEvent.getLocation()));
+        eventPublisher.publishEvent(new EventEvent("Create Event", newEvent.getName(), newEvent.getDate(), newEvent.getLocation(), newEvent.getTicketPrice()));
 
         return eventRepository.save(newEvent);
     }
@@ -51,7 +51,7 @@ public class EventService {
         event.addAttendee(attendee);
         attendee.setEvent(event);
         //save event
-        eventPublisher.publishEvent(new EventEvent("Added Attendee id(" + attendeeId + ") to Event id(" + id + ")", event.getName(), event.getDate(), event.getLocation()));
+        eventPublisher.publishEvent(new EventEvent("Added Attendee id(" + attendeeId + ") to Event id(" + id + ")", event.getName(), event.getDate(), event.getLocation(), event.getTicketPrice()));
 
         return eventRepository.save(event);
     }
@@ -64,7 +64,7 @@ public class EventService {
         event.removeAttendee(attendee);
         attendee.setEvent(null);
         //save event
-        eventPublisher.publishEvent(new EventEvent("Removed Attendee id(" + attendeeId + ") from Event id(" + id + ")", event.getName(), event.getDate(), event.getLocation()));
+        eventPublisher.publishEvent(new EventEvent("Removed Attendee id(" + attendeeId + ") from Event id(" + id + ")", event.getName(), event.getDate(), event.getLocation(), event.getTicketPrice()));
 
         return eventRepository.save(event);
     }
@@ -80,13 +80,14 @@ public class EventService {
     }
 
     //edit event
-    public Event editEvent(Long id, String name, String date, String location){
+    public Event editEvent(Long id, String name, String date, String location, Long price){
         Event event = eventRepository.findById(id).orElseThrow(RuntimeException::new);
         event.setName(name);
         event.setDate(date);
         event.setLocation(location);
+        event.setTicketPrice(price);
         //save event
-        eventPublisher.publishEvent(new EventEvent("Edited Event id(" + id + ")", event.getName(), event.getDate(), event.getLocation()));
+        eventPublisher.publishEvent(new EventEvent("Edited Event id(" + id + ")", event.getName(), event.getDate(), event.getLocation(), event.getTicketPrice()));
 
         return eventRepository.save(event);
     }

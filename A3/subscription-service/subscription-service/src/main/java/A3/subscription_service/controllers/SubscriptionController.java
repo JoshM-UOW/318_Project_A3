@@ -24,7 +24,7 @@ public class SubscriptionController {
                     SubscriptionDTO subscriptionDTO = new SubscriptionDTO();
                     subscriptionDTO.setId(subscription.getId());
                     subscriptionDTO.setType(subscription.getType());
-                    subscriptionDTO.setExpirary(subscription.getExpirary());
+                    subscriptionDTO.setExpiry(subscription.getExpiry());
                     subscriptionDTO.setAttendees(subscription.getAttendees());
                     return subscriptionDTO;
                 }).collect(Collectors.toList());
@@ -37,7 +37,7 @@ public class SubscriptionController {
         Subscription subscription = subscriptionService.getSubscriptionById(id);
         subscriptionDTO.setId(subscription.getId());
         subscriptionDTO.setType(subscription.getType());
-        subscriptionDTO.setExpirary(subscription.getExpirary());
+        subscriptionDTO.setExpiry(subscription.getExpiry());
         subscriptionDTO.setAttendees(subscription.getAttendees());
         return subscriptionDTO;
     }
@@ -61,8 +61,8 @@ public class SubscriptionController {
     }
 
     //edit sub details
-    @PutMapping("/subscriptions/{id}/edit/{type},{expirary}")
-    Subscription editDetails(@PathVariable Long id, @PathVariable String type, @PathVariable String expirary) {
-        return subscriptionService.editSubscription(id, type, expirary);
+    @PutMapping("/subscriptions/{id}/edit/{type},{expiry}")
+    Subscription editDetails(@PathVariable Long id, @PathVariable String type, @PathVariable String expiry) {
+        return subscriptionService.editSubscription(id, type, expiry);
     }
 }

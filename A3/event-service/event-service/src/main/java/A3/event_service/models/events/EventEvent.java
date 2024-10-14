@@ -24,11 +24,15 @@ public class EventEvent {
     @Column
     private String location;
 
-    public EventEvent(String eventName, String name, String date, String location){
+    @Column
+    private long ticketPrice;
+
+    public EventEvent(String eventName, String name, String date, String location, Long price){
         this.eventName = eventName;
         this.name = name;
         this.date = date;
         this.location = location;
+        this.ticketPrice = price;
     }
 
     //id
@@ -71,13 +75,22 @@ public class EventEvent {
         this.location = location;
     }
 
+    //price
+    public long getTicketPrice() {
+        return ticketPrice;
+    }
+    public void setTicketPrice(long price) {
+        this.ticketPrice = price;
+    }
+
     @Override
     public String toString() {
         return "EventEvent{" +
                 "event_name='" + getEventName() + '\'' +
                 ", name='" + getName() + '\'' +
                 ", date='" + getDate() + '\'' +
-                ", location=" + getLocation() +
+                ", location=" + getLocation() + '\'' +
+                ", price=" + getTicketPrice() +
                 '}';
     }
 }

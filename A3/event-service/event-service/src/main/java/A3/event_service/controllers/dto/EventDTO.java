@@ -16,6 +16,9 @@ public class EventDTO {
     //location
     private String location;
 
+    //price
+    private long ticketPrice;
+
     //arraylist for attendees
     private static ArrayList<Attendee> attendees = new ArrayList<Attendee>();
 
@@ -52,6 +55,14 @@ public class EventDTO {
     }
     public void setLocation(String location){
         this.location = location;
+    }
+
+    //price
+    public long getTicketPrice() {
+        return ticketPrice;
+    }
+    public void setTicketPrice(long price) {
+        this.ticketPrice = price;
     }
 
     //attendees

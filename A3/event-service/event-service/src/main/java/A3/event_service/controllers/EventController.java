@@ -26,6 +26,7 @@ public class EventController {
                     eventDTO.setName(event.getName());
                     eventDTO.setDate(event.getDate());
                     eventDTO.setLocation(event.getLocation());
+                    eventDTO.setTicketPrice(event.getTicketPrice());
                     eventDTO.setAttendees(event.getAttendees());
                     return eventDTO;
                 }).collect(Collectors.toList());
@@ -40,6 +41,7 @@ public class EventController {
         eventDTO.setName(event.getName());
         eventDTO.setDate(event.getDate());
         eventDTO.setLocation(event.getLocation());
+        eventDTO.setTicketPrice(event.getTicketPrice());
         eventDTO.setAttendees(event.getAttendees());
         return eventDTO;
     }
@@ -63,8 +65,8 @@ public class EventController {
     }
 
     //edit event details
-    @PutMapping("/events/{id}/edit/{name},{date},{location}")
-    Event editDetails(@PathVariable Long id, @PathVariable String name, @PathVariable String date, @PathVariable String location) {
-        return eventService.editEvent(id, name, date, location);
+    @PutMapping("/events/{id}/edit/{name},{date},{location},{price}")
+    Event editDetails(@PathVariable Long id, @PathVariable String name, @PathVariable String date, @PathVariable String location, @PathVariable Long price) {
+        return eventService.editEvent(id, name, date, location, price);
     }
 }

@@ -1,4 +1,4 @@
-package A3.subscription_service.models;
+package A3.event_service.models;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

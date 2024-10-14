@@ -26,6 +26,10 @@ public class Event {
     @Column
     private String location;
 
+    //price
+    @Column
+    private long ticketPrice;
+
     //arraylist for attendees
     @OneToMany(cascade=CascadeType.PERSIST, mappedBy = "event")
     private static ArrayList<Attendee> attendees = new ArrayList<Attendee>();
@@ -69,6 +73,14 @@ public class Event {
     }
     public void setLocation(String location){
         this.location = location;
+    }
+
+    //price
+    public long getTicketPrice() {
+        return ticketPrice;
+    }
+    public void setTicketPrice(long price) {
+        this.ticketPrice = price;
     }
 
     //attendees
