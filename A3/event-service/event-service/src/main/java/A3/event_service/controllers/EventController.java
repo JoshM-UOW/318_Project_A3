@@ -18,6 +18,7 @@ public class EventController {
 
     //return all events
     @GetMapping("/events")
+    @ResponseBody
     List<EventDTO> findAllEvents() {
         return eventService.findAllEvents().stream()
                 .map(event -> {
@@ -34,6 +35,7 @@ public class EventController {
 
     //return event of X id
     @GetMapping("/events/{id}")
+    @ResponseBody
     EventDTO getEventById(@PathVariable Long id) {
         EventDTO eventDTO = new EventDTO();
         Event event = eventService.getEventById(id);
@@ -48,7 +50,8 @@ public class EventController {
 
     //create event
     @PostMapping("/events")
-    Event createEvent(@RequestBody Event newEvent) {
+    @ResponseBody
+    String createEvent(@RequestBody Event newEvent) {
         return eventService.saveEvent(newEvent);
     }
 

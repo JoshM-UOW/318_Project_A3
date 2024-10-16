@@ -36,11 +36,13 @@ public class EventService {
     }
 
     //save event
-    public Event saveEvent(Event newEvent) {
+    public String saveEvent(Event newEvent) {
         //save event
         eventPublisher.publishEvent(new EventEvent("Create Event", newEvent.getName(), newEvent.getDate(), newEvent.getLocation(), newEvent.getTicketPrice()));
 
-        return eventRepository.save(newEvent);
+        newEvent.completedObj(); //create kafka event
+        eventRepository.save(newEvent);
+        return "Event " + newEvent.getId() + " + Kafka BookingEvent saved!";
     }
 
     //to add an attendee

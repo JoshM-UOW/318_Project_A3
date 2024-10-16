@@ -6,8 +6,11 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import A3.event_service.kafka.*;
+import org.springframework.data.domain.AbstractAggregateRoot;
+
 @Entity
-public class Event {
+public class Event extends AbstractAggregateRoot<Event> {
 
     //id
     @Id
@@ -41,6 +44,7 @@ public class Event {
     private Organiser organiser;
 
     public Event() {
+        //addDomainEvent(new BookingEvent(new BookingEventData(id, name, date, location, ticketPrice)));
     };
 
     //id
@@ -108,5 +112,15 @@ public class Event {
     }
     public void setOrganiser(Organiser organiser){
         this.organiser = organiser;
+    }
+
+    //register bookingEvent
+    public void completedObj(){
+        long randomId;
+        randomId = 1 + (long) (Math.random()*(10000-1));
+        addDomainEvent(new BookingEvent(new BookingEventData(randomId, name, date, location, ticketPrice)));
+    }
+    private void addDomainEvent(Object event){
+        registerEvent(event);
     }
 }

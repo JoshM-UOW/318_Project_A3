@@ -70,7 +70,7 @@ curl -X GET http://localhost:8081/attendeeMessages/1
 
 
 //edit event deets
-curl -i -X PUT http://localhost:8082/events/1/edit/event1NewName,10-10-2030,mars
+curl -i -X PUT http://localhost:8082/events/1/edit/event1NewName,10-10-2030,mars,1050
 
 
 
@@ -90,7 +90,27 @@ curl -i -X PUT http://localhost:8083/subscriptions/1/edit/gold++,1-1-2050
 
 
 TO DO:
+kafka for organiser/attendee/subscription  creation
 
 
 
-rewrite everything in kafka
+
+
+cd "C:\Users\jmcco\OneDrive\Desktop\UOW\CSCI318 (Software Engineering Practices & Principles)\Group Project\A3\A3Git\318_Project_A3\A3"
+
+KAFKA
+cd "C:\Kafka"
+C:\kafka\bin\windows\zookeeper-server-start.bat C:\kafka\config\zookeeper.properties
+
+in seperate window:
+C:\kafka\bin\windows\kafka-server-start.bat C:\kafka\config\server.properties
+
+//list topics
+C:\kafka\bin\windows\kafka-topics.bat --bootstrap-server=localhost:9092 --list
+
+//list bookingevents
+C:\kafka\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic bookingevents --from-beginning
+
+wipe tmp data (if kafka stops working)
+rmdir /s /q C:\tmp\kakfa-logs
+rmdir /s /q C:\tmp\zookeeper
