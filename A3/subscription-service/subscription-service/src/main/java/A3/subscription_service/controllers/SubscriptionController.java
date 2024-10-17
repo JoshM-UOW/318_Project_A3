@@ -18,6 +18,7 @@ public class SubscriptionController {
 
     //return all subs
     @GetMapping("/subscriptions")
+    @ResponseBody
     List<SubscriptionDTO> findAllSubscriptions() {
         return subscriptionService.findAllSubscriptions().stream()
                 .map(subscription -> {
@@ -32,6 +33,7 @@ public class SubscriptionController {
 
     //return subs
     @GetMapping("/subscriptions/{id}")
+    @ResponseBody
     SubscriptionDTO getSubscriptionById(@PathVariable Long id) {
         SubscriptionDTO subscriptionDTO = new SubscriptionDTO();
         Subscription subscription = subscriptionService.getSubscriptionById(id);
@@ -44,7 +46,8 @@ public class SubscriptionController {
 
     //create a sub
     @PostMapping("/subscriptions")
-    Subscription createSubscription(@RequestBody Subscription subscription) {
+    @ResponseBody
+    String createSubscription(@RequestBody Subscription subscription) {
         return subscriptionService.createSubscription(subscription);
     }
 

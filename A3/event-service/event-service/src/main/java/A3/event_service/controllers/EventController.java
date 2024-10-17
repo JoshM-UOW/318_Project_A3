@@ -1,19 +1,23 @@
 package A3.event_service.controllers;
 
 import A3.event_service.controllers.dto.EventDTO;
+import A3.event_service.kafka.*;
 import A3.event_service.models.AttendeeMessage;
 import org.springframework.web.bind.annotation.*;
 import A3.event_service.models.Event;
 import A3.event_service.services.EventService;
 import java.util.List;
+import java.util.concurrent.LinkedTransferQueue;
 import java.util.stream.Collectors;
 
 @RestController
 public class EventController {
     private final EventService eventService;
+    InteractiveQuery interactiveQuery;
 
-    EventController(EventService eventService) {
+    EventController(EventService eventService, InteractiveQuery interactiveQuery) {
         this.eventService = eventService;
+        this.interactiveQuery = interactiveQuery;
     }
 
     //return all events
@@ -31,6 +35,14 @@ public class EventController {
                     eventDTO.setAttendees(event.getAttendees());
                     return eventDTO;
                 }).collect(Collectors.toList());
+    }
+
+
+    //return all events
+    @GetMapping("/eventsKafka")
+    @ResponseBody
+    List<BookingEventData> findAllEventsKafka() {
+        return interactiveQuery.getAllBookingsByCity();
     }
 
     //return event of X id

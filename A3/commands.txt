@@ -90,7 +90,12 @@ curl -i -X PUT http://localhost:8083/subscriptions/1/edit/gold++,1-1-2050
 
 
 TO DO:
-kafka for organiser/attendee/subscription  creation
+
+reinstall kafka
+
+kafka for organiser
+attendee
+subscription  
 
 
 

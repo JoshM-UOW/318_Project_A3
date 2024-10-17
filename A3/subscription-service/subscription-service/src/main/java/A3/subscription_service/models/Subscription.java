@@ -1,12 +1,14 @@
 package A3.subscription_service.models;
+import A3.subscription_service.kafka.*;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 @Entity
-public class Subscription {
+public class Subscription extends AbstractAggregateRoot<Subscription> {
     //id
     @Id
     @GeneratedValue
@@ -57,5 +59,15 @@ public class Subscription {
                 itr.remove();
             }
         }
+    }
+
+    //register subscriptionEventKafka
+    public void completedObj(){
+        long randomId;
+        randomId = 1 + (long) (Math.random()*(10000-1));
+        addDomainEvent(new SubscriptionEventKafka(new SubscriptionEventData(randomId, type, expiry)));
+    }
+    private void addDomainEvent(Object event){
+        registerEvent(event);
     }
 }

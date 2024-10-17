@@ -36,11 +36,15 @@ public class SubscriptionService {
     }
 
     //create an attendee message
-    public Subscription createSubscription(Subscription newSub) {
+    public String createSubscription(Subscription newSub) {
         //save event
         eventPublisher.publishEvent(new SubscriptionEvent("Create Subscription", newSub.getType(), newSub.getExpiry()));
 
-        return subscriptionRepository.save(newSub);
+        //return subscriptionRepository.save(newSub);
+
+        newSub.completedObj(); //create kafka event
+        subscriptionRepository.save(newSub);
+        return "Subscription " + newSub.getId() + " + Kafka SubscriptionEvent saved!";
     }
 
 
